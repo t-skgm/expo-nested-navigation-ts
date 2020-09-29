@@ -3,11 +3,16 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import { TabTwoNavigationProps } from '../types';
 
-export default function TabTwoScreen() {
+type Props = TabTwoNavigationProps<'TabTwoScreen'>
+
+export default function TabTwoScreen({ route }: Props) {
+  const name = route.params?.name
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
+      {name && <Text style={styles.hello}>Hello, {name}!</Text>}
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="/screens/TabTwoScreen.js" />
     </View>
@@ -22,6 +27,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+    fontWeight: 'bold',
+  },
+  hello: {
+    fontSize: 30,
     fontWeight: 'bold',
   },
   separator: {
