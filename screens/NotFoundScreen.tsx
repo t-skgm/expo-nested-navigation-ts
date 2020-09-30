@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { RootNavigationProps } from '../types';
+import { RootScreenProps } from '../types';
 
-type Props = RootNavigationProps<'NotFound'>
+type Props = RootScreenProps<'NotFound'>
 
 export default function NotFoundScreen({ navigation }: Props) {
   return (

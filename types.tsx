@@ -22,7 +22,7 @@ export type RootStackParamList = {
 
 type RootNavigation = StackNavigationProp<RootStackParamList>
 
-export type RootNavigationProps<RouteName extends keyof RootStackParamList> = {
+export type RootScreenProps<RouteName extends keyof RootStackParamList> = {
   navigation: StackNavigationProp<RootStackParamList, RouteName>
   route: RouteProp<RootStackParamList, RouteName>
 }
@@ -38,11 +38,6 @@ export type MainParamList = {
 
 type MainNavigation = CompositeNavigationProp<StackNavigationProp<MainParamList>, RootNavigation>
 
-export type MainNavigationProps<RouteName extends keyof MainParamList> = {
-  navigation: CompositeNavigationProp<StackNavigationProp<MainParamList, RouteName>, RootNavigation>
-  route: RouteProp<MainParamList, RouteName>
-}
-
 /**
  * TabOne Stack
  */
@@ -51,7 +46,7 @@ export type TabOneParamList = {
   TabOneScreen: undefined;
 };
 
-export type TabOneNavigationProps<RouteName extends keyof TabOneParamList> = {
+export type TabOneScreenProps<RouteName extends keyof TabOneParamList> = {
   navigation: CompositeNavigationProp<StackNavigationProp<TabOneParamList, RouteName>, MainNavigation>
   route: RouteProp<TabOneParamList, RouteName>
 }
@@ -64,7 +59,7 @@ export type TabTwoParamList = {
   TabTwoScreen?: { name: string };
 };
 
-export type TabTwoNavigationProps<RouteName extends keyof TabTwoParamList> = {
+export type TabTwoScreenProps<RouteName extends keyof TabTwoParamList> = {
   navigation: CompositeNavigationProp<StackNavigationProp<TabTwoParamList, RouteName>, MainNavigation>
   route: RouteProp<TabTwoParamList, RouteName>
 }

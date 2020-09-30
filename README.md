@@ -20,12 +20,10 @@ export type MainParamList = {
   TabTwo?: NestedNavigator<TabTwoParamList>;
 };
 
-type MainNavigation = CompositeNavigationProp<StackNavigationProp<MainParamList>, RootNavigation>
-
-export type MainNavigationProps<RouteName extends keyof MainParamList> = {
-  navigation: CompositeNavigationProp<StackNavigationProp<MainParamList, RouteName>, RootNavigation>
-  route: RouteProp<MainParamList, RouteName>
-}
+type MainNavigation = CompositeNavigationProp<
+  StackNavigationProp<MainParamList>, /** Current Stack */
+  RootNavigation /** Parent Stack */
+>
 
 // ...
 
@@ -33,9 +31,9 @@ export type TabOneParamList = {
   TabOneScreen: undefined;
 };
 
-export type TabOneNavigationProps<RouteName extends keyof TabOneParamList> = {
+export type TabOneScreenProps<RouteName extends keyof TabOneParamList> = {
   navigation: CompositeNavigationProp<
-    StackNavigationProp<TabOneParamList, RouteName>, /** Own Stack */
+    StackNavigationProp<TabOneParamList, RouteName>, /** Current Stack */
     MainNavigation /** Parent Stack */
   >
   route: RouteProp<TabOneParamList, RouteName>
@@ -45,16 +43,19 @@ export type TabTwoParamList = {
   TabTwoScreen?: { name: string };
 };
 
-export type TabTwoNavigationProps<RouteName extends keyof TabTwoParamList> = {
-  navigation: CompositeNavigationProp<StackNavigationProp<TabTwoParamList, RouteName>, MainNavigation>
+export type TabTwoScreenProps<RouteName extends keyof TabTwoParamList> = {
+  navigation: CompositeNavigationProp<
+    StackNavigationProp<TabTwoParamList, RouteName>, /** Current Stack */
+    MainNavigation /** Parent Stack */
+  >
   route: RouteProp<TabTwoParamList, RouteName>
 }
 ```
 
-Now you can use `TabOneNavigationProps` and `TabTwoNavigationProps` in Screen components
+Now you can use `navigation` and `route` props with `*ScreenProps` in Screen components
 
 ```tsx
-type Props = TabOneNavigationProps<'TabOneScreen'>
+type Props = TabOneScreenProps<'TabOneScreen'>
 
 export default function TabOneScreen({ navigation }: Props) {
   return (
@@ -74,7 +75,7 @@ export default function TabOneScreen({ navigation }: Props) {
 
 // ...
 
-type Props = TabTwoNavigationProps<'TabTwoScreen'>
+type Props = TabTwoScreenProps<'TabTwoScreen'>
 
 export default function TabTwoScreen({ route }: Props) {
   // `route` also typed

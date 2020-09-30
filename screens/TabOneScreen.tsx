@@ -3,9 +3,9 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import { TabOneNavigationProps } from '../types';
+import { TabOneScreenProps } from '../types';
 
-type Props = TabOneNavigationProps<'TabOneScreen'>
+type Props = TabOneScreenProps<'TabOneScreen'>
 
 export default function TabOneScreen({ navigation }: Props) {
   return (
